@@ -71,8 +71,10 @@
     .btn-ghost { border: 1px solid rgba(255,179,71,.38); background: rgba(255,255,255,.06); color: var(--text); }
     .btn-ghost:hover { border-color: var(--orange2); background: rgba(255,138,0,.10); }
 
-    .hero { padding: 142px 0 78px; position: relative; }
-    .hero::after { content:""; position:absolute; right:-120px; top:120px; width:420px; height:420px; border-radius:50%; background:rgba(255,138,0,.16); filter:blur(35px); z-index:-1; }
+    .hero { padding: 142px 0 78px; position: relative; overflow:hidden; background: linear-gradient(90deg, rgba(13,13,15,.96) 0%, rgba(13,13,15,.83) 48%, rgba(13,13,15,.55) 100%), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85') center/cover no-repeat; }
+    .hero::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 20% 35%, rgba(255,138,0,.20), transparent 32%), linear-gradient(180deg, transparent 70%, var(--bg) 100%); pointer-events:none; }
+    .hero::after { content:""; position:absolute; right:-120px; top:120px; width:420px; height:420px; border-radius:50%; background:rgba(255,138,0,.16); filter:blur(35px); z-index:0; }
+    .hero .container { position:relative; z-index:1; }
     .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 44px; align-items: center; }
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--orange2); font-weight: 900; text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; margin-bottom: 16px; }
     h1 { font-size: clamp(2.65rem, 6vw, 5.45rem); line-height: .94; letter-spacing: -.075em; margin-bottom: 22px; }
@@ -117,6 +119,14 @@
     .car-specs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
     .spec, #modalSpecs div { background: rgba(255,255,255,.07); border: 1px solid var(--line); color: var(--muted); border-radius: 999px; padding: 8px 10px; font-size: .8rem; font-weight: 800; }
     .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .booking-fields { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:16px 0 12px; }
+    .date-field { display:grid; gap:7px; }
+    .date-field label { font-size:.78rem; font-weight:900; color:var(--muted); }
+    .date-field input { width:100%; min-width:0; color:var(--text); background:rgba(255,255,255,.075); border:1px solid var(--line); border-radius:14px; padding:12px 11px; outline:none; font-family:inherit; color-scheme:dark; }
+    .date-field input:focus { border-color:rgba(255,138,0,.75); box-shadow:0 0 0 3px rgba(255,138,0,.13); }
+    .date-warning { display:none; margin:8px 0 0; color:var(--orange2); font-size:.86rem; font-weight:800; }
+    .date-warning.show { display:block; }
+
     .small-btn { border: none; border-radius: 15px; padding: 12px 14px; font-weight: 900; cursor: pointer; text-align: center; }
     .view-btn { background: var(--cream); color: #17110a; }
     .wa-btn { background: var(--green); color: white; }
@@ -243,6 +253,7 @@
       .car-card img { height:210px; }
       .car-title-row { flex-direction:column; gap:6px; }
       .card-actions { grid-template-columns:1fr; }
+      .booking-fields { grid-template-columns:1fr; }
       .contact-box { padding:22px; border-radius:22px; }
       .modal { padding:10px; align-items:start; overflow:auto; }
       .modal > .modal-content { max-height:none; margin:8px 0; border-radius:22px; }
@@ -258,6 +269,85 @@
       .container { width:calc(100% - 18px); }
       .hero-card img, .modal-img { height:215px; }
       .feature, .car-body, .step { padding:18px; }
+    }
+
+
+
+    /* ===== Final mobile responsive audit fixes ===== */
+    html, body { width:100%; max-width:100%; overflow-x:hidden; }
+    main, section, header, footer, .container, .hero-grid, .feature-grid, .cars-grid, .steps, .contact-box, .modal-grid { min-width:0; }
+    .brand, .brand span, .lead, h1, h2, h3, p, a, button { min-width:0; overflow-wrap:anywhere; }
+    .hero { background-position:center center; }
+    .feature-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+    .cars-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+    .booking-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:16px 0 6px; }
+    .date-field input { max-width:100%; appearance:auto; -webkit-appearance:auto; }
+    .card-actions, .modal-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .btn, .view-btn, .wa-btn, .filter, .lang-btn, .menu-btn, .whatsapp-top { touch-action:manipulation; }
+
+    @media (max-width:1100px){
+      .feature-grid, .steps { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .cars-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .hero-grid { grid-template-columns:1fr; }
+      .hero-card { max-width:720px; width:100%; }
+    }
+
+    @media (max-width:720px){
+      .container { width:calc(100% - 24px); }
+      .nav { height:66px; gap:8px; }
+      .brand { flex:1 1 auto; max-width:calc(100% - 92px); }
+      .brand span { max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .actions { gap:7px; }
+      .whatsapp-top { display:none !important; }
+      .lang-btn, .menu-btn { width:38px; min-width:38px; height:38px; padding:0; }
+      .navlinks { top:74px !important; left:12px !important; right:12px !important; max-height:calc(100vh - 88px); overflow:auto; }
+      .hero { padding:94px 0 34px; background-position:center top; }
+      .hero::after { display:none; }
+      .hero-grid { gap:22px; }
+      h1 { font-size:clamp(2.05rem,10.5vw,3.35rem); line-height:1.02; letter-spacing:-.055em; }
+      h2 { font-size:clamp(1.65rem,7.6vw,2.35rem); line-height:1.08; }
+      .lead { font-size:.96rem; line-height:1.65; }
+      .hero-buttons { grid-template-columns:1fr; display:grid; }
+      .hero-card { border-radius:22px; padding:9px; }
+      .hero-card img { height:220px; border-radius:18px; }
+      .stats { grid-template-columns:1fr; gap:8px; }
+      .stat { padding:12px; }
+      section { padding:46px 0; }
+      .section-head { display:block; margin-bottom:18px; }
+      .section-head p { margin-top:10px; }
+      .feature-grid, .cars-grid, .steps { grid-template-columns:1fr !important; gap:14px; }
+      .feature, .step, .car-body { padding:20px; }
+      .filters { display:flex; overflow-x:auto; flex-wrap:nowrap; gap:8px; padding:0 0 10px; margin-bottom:18px; scroll-snap-type:x proximity; }
+      .filter { flex:0 0 auto; white-space:nowrap; scroll-snap-align:start; }
+      .car-card { border-radius:22px; }
+      .car-card img { height:205px; }
+      .car-title-row { flex-direction:column; align-items:flex-start; gap:6px; }
+      .specs { gap:7px; }
+      .spec, #modalSpecs div, .modal-specs div { border-radius:14px; }
+      .booking-fields, .card-actions, .modal-actions { grid-template-columns:1fr !important; }
+      .date-field input { min-height:46px; font-size:16px; }
+      .contact-box { grid-template-columns:1fr; padding:20px; border-radius:22px; }
+      .contact-row { overflow-wrap:anywhere; }
+      .modal { padding:0; align-items:stretch; place-items:stretch; overflow:auto; }
+      .modal > .modal-content { width:100%; max-height:none; min-height:100vh; margin:0; border-radius:0; border-left:0; border-right:0; }
+      .modal-grid { grid-template-columns:1fr !important; }
+      .modal-img { height:220px !important; min-height:0 !important; border-radius:0; }
+      .modal-info { padding:20px; }
+      .modal-info h2 { font-size:1.75rem; line-height:1.1; }
+      .close { right:12px; top:12px; width:40px; height:40px; background:rgba(0,0,0,.78); }
+      .foot { display:grid; justify-content:center; text-align:center; gap:8px; }
+    }
+
+    @media (max-width:390px){
+      .container { width:calc(100% - 18px); }
+      .logo { width:40px; height:40px; border-radius:12px; }
+      .brand { gap:8px; max-width:calc(100% - 88px); }
+      .brand span { font-size:.86rem; }
+      .hero { padding-top:88px; }
+      h1 { font-size:2rem; }
+      .hero-card img, .modal-img { height:195px !important; }
+      .feature, .step, .car-body, .modal-info, .contact-box { padding:17px; }
+      .btn, .view-btn, .wa-btn { padding:12px 14px; font-size:.92rem; }
     }
 
 </style>
@@ -379,6 +469,11 @@
           <div class="price" id="modalPrice"></div>
           <p class="modal-desc" id="modalDesc"></p>
           <div class="modal-specs" id="modalSpecs"></div>
+          <div class="booking-fields">
+            <div class="date-field"><label id="modalPickupLabel" for="modalPickup"></label><input type="date" id="modalPickup"></div>
+            <div class="date-field"><label id="modalReturnLabel" for="modalReturn"></label><input type="date" id="modalReturn"></div>
+          </div>
+          <div class="date-warning" id="modalDateWarning"></div>
           <div class="modal-actions">
             <a class="btn btn-primary" id="modalWhatsapp" target="_blank" rel="noopener"></a>
             <button class="btn btn-ghost" id="copyLink"></button>
@@ -403,10 +498,10 @@
       f2t: 'Rezervim i shpejtë', f2p: 'Çdo makinë ka buton WhatsApp me mesazh automatik dhe linkun përkatës.',
       f3t: 'Makina të pastra', f3p: 'Automjetet dorëzohen të kontrolluara, të pastra dhe gati për rrugë.',
       f4t: 'Dorëzim fleksibël', f4p: 'Mundësi dorëzimi në qytet, aeroport ose sipas marrëveshjes.',
-      fleetTitle: 'Flota jonë', fleetLead: 'Kliko “Shiko” për popup me detaje. Nga popup mund ta dërgosh direkt makinën në WhatsApp bashkë me linkun e saj.',
+      fleetTitle: 'Flota jonë', fleetLead: 'Kliko “Shiko” për popup me detaje. Zgjidh datat dhe dërgo direkt makinën në WhatsApp bashkë me linkun e saj.',
       processTitle: 'Si funksionon?', processLead: 'Proces i thjeshtë për të zgjedhur, kontaktuar dhe marrë makinën me qira.',
       s1t: 'Zgjidh makinën', s1p: 'Shfleto flotën dhe hap popup-in për të parë foton, çmimin dhe specifikat.',
-      s2t: 'Dërgo në WhatsApp', s2p: 'Butoni dërgon automatikisht emrin e makinës dhe linkun e saj.',
+      s2t: 'Dërgo në WhatsApp', s2p: 'Butoni dërgon automatikisht emrin e makinës, datat e zgjedhura dhe linkun e saj.',
       s3t: 'Konfirmo datat', s3p: 'Vendos periudhën e marrjes me qira dhe vendin e dorëzimit.',
       s4t: 'Nisu për rrugë', s4p: 'Merr makinën të pastër, të kontrolluar dhe gati për udhëtim.',
       contactTitle: 'Gati për rezervim?', contactLead: 'Na kontakto në WhatsApp për disponueshmërinë, çmimin final dhe kushtet e marrjes me qira.', contactButton: 'Kontakto në WhatsApp',
@@ -415,7 +510,8 @@
       view: 'Shiko', whatsapp: 'WhatsApp', seats: 'vende', automatic: 'Automat', manual: 'Manual', day: 'ditë',
       modalWa: 'Dërgo këtë makinë në WhatsApp', copy: 'Kopjo linkun e makinës', copied: 'Linku u kopjua',
       waGeneral: 'Përshëndetje Rent a Car Enzo! Dua informacion për marrje makine me qira.',
-      waCar: 'Përshëndetje Rent a Car Enzo! Jam i/e interesuar për këtë makinë:'
+      waCar: 'Përshëndetje Rent a Car Enzo! Jam i/e interesuar për këtë makinë:',
+      pickupDate: 'Data e marrjes', returnDate: 'Data e dorëzimit', chooseDates: 'Ju lutem zgjidhni datën e marrjes dhe dorëzimit.'
     },
     en: {
       navHome: 'Home', navFleet: 'Cars', navProcess: 'How it works', navContact: 'Contact',
@@ -427,10 +523,10 @@
       f2t: 'Fast booking', f2p: 'Every car has a WhatsApp button with automatic message and its dedicated link.',
       f3t: 'Clean vehicles', f3p: 'Cars are delivered checked, clean and ready for the road.',
       f4t: 'Flexible delivery', f4p: 'Delivery available in the city, airport or by agreement.',
-      fleetTitle: 'Our fleet', fleetLead: 'Click “View” for a details popup. From the popup you can send the selected car to WhatsApp together with its link.',
+      fleetTitle: 'Our fleet', fleetLead: 'Click “View” for a details popup. Select the dates and send the selected car to WhatsApp together with its link.',
       processTitle: 'How does it work?', processLead: 'A simple process to choose, contact and rent your car.',
       s1t: 'Choose a car', s1p: 'Browse the fleet and open the popup to view photo, price and specifications.',
-      s2t: 'Send to WhatsApp', s2p: 'The button automatically sends the car name and its link.',
+      s2t: 'Send to WhatsApp', s2p: 'The button automatically sends the car name, selected dates and its link.',
       s3t: 'Confirm dates', s3p: 'Set the rental period and the delivery location.',
       s4t: 'Start driving', s4p: 'Receive a clean, checked and road-ready vehicle.',
       contactTitle: 'Ready to book?', contactLead: 'Contact us on WhatsApp for availability, final price and rental terms.', contactButton: 'Contact on WhatsApp',
@@ -439,7 +535,8 @@
       view: 'View', whatsapp: 'WhatsApp', seats: 'seats', automatic: 'Automatic', manual: 'Manual', day: 'day',
       modalWa: 'Send this car on WhatsApp', copy: 'Copy car link', copied: 'Link copied',
       waGeneral: 'Hello Rent a Car Enzo! I would like information about renting a car.',
-      waCar: 'Hello Rent a Car Enzo! I am interested in this car:'
+      waCar: 'Hello Rent a Car Enzo! I am interested in this car:',
+      pickupDate: 'Pick-up date', returnDate: 'Return date', chooseDates: 'Please select pick-up and return dates.'
     }
   };
 
@@ -492,6 +589,23 @@
   function carLink(car) { return `${SITE_URL}#car-${car.id}`; }
   function waLink(message) { return `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(message)}`; }
 
+  function todayISO() { return new Date().toISOString().split('T')[0]; }
+  function carMessage(car, pickup='', ret='') {
+    const pickupLine = pickup ? `${t('pickupDate')}: ${pickup}` : `${t('pickupDate')}: -`;
+    const returnLine = ret ? `${t('returnDate')}: ${ret}` : `${t('returnDate')}: -`;
+    return `${t('waCar')} ${car.name} - ${car.price}/${t('day')}
+${pickupLine}
+${returnLine}
+Link: ${carLink(car)}`;
+  }
+  function sendCardWhatsapp(id) {
+    const car = cars.find(c => c.id === id);
+    if (!car) return;
+    const pickup = document.getElementById(`pickup-${id}`)?.value || '';
+    const ret = document.getElementById(`return-${id}`)?.value || '';
+    window.open(waLink(carMessage(car, pickup, ret)), '_blank', 'noopener');
+  }
+
   function updateStaticText() {
     $$('[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
     $('#langBtn').textContent = lang === 'sq' ? 'EN' : 'SQ';
@@ -500,6 +614,9 @@
     $('#contactWhatsapp').href = waLink(t('waGeneral'));
     $('#modalWhatsapp').textContent = t('modalWa');
     $('#copyLink').textContent = t('copy');
+    $('#modalPickupLabel').textContent = t('pickupDate');
+    $('#modalReturnLabel').textContent = t('returnDate');
+    $('#modalDateWarning').textContent = t('chooseDates');
   }
 
   function renderFilters() {
@@ -512,7 +629,6 @@
     const list = currentFilter === 'all' ? cars : cars.filter(c => c.category === currentFilter);
     $('#carsGrid').innerHTML = list.map(car => {
       const specs = lang === 'sq' ? car.specs : car.specsEn;
-      const message = `${t('waCar')} ${car.name} - ${car.price}/${t('day')}\n${carLink(car)}`;
       return `
         <article class="car-card" id="car-${car.id}">
           <div class="car-img-wrap">
@@ -522,9 +638,13 @@
           <div class="car-body">
             <div class="car-title-row"><h3>${car.name}</h3><div class="price">${car.price}/${t('day')}</div></div>
             <div class="car-specs">${specs.map(s => `<div class="spec">${s}</div>`).join('')}</div>
+            <div class="booking-fields">
+              <div class="date-field"><label for="pickup-${car.id}">${t('pickupDate')}</label><input type="date" id="pickup-${car.id}" min="${todayISO()}"></div>
+              <div class="date-field"><label for="return-${car.id}">${t('returnDate')}</label><input type="date" id="return-${car.id}" min="${todayISO()}"></div>
+            </div>
             <div class="card-actions">
               <button class="small-btn view-btn" onclick="openCar('${car.id}')">${t('view')}</button>
-              <a class="small-btn wa-btn" target="_blank" rel="noopener" href="${waLink(message)}">${t('whatsapp')}</a>
+              <button class="small-btn wa-btn" onclick="sendCardWhatsapp('${car.id}')">${t('whatsapp')}</button>
             </div>
           </div>
         </article>`;
@@ -542,8 +662,19 @@
     $('#modalPrice').textContent = `${car.price}/${t('day')}`;
     $('#modalDesc').textContent = lang === 'sq' ? car.descSq : car.descEn;
     $('#modalSpecs').innerHTML = specs.map(s => `<div>${s}</div>`).join('');
-    const message = `${t('waCar')} ${car.name} - ${car.price}/${t('day')}\n${carLink(car)}`;
-    $('#modalWhatsapp').href = waLink(message);
+    const modalPickup = $('#modalPickup');
+    const modalReturn = $('#modalReturn');
+    modalPickup.min = todayISO();
+    modalReturn.min = todayISO();
+    modalPickup.value = document.getElementById(`pickup-${car.id}`)?.value || '';
+    modalReturn.value = document.getElementById(`return-${car.id}`)?.value || '';
+    const updateModalWhatsapp = () => {
+      $('#modalWhatsapp').href = waLink(carMessage(car, modalPickup.value, modalReturn.value));
+      $('#modalDateWarning').classList.toggle('show', !modalPickup.value || !modalReturn.value);
+    };
+    modalPickup.onchange = () => { modalReturn.min = modalPickup.value || todayISO(); updateModalWhatsapp(); };
+    modalReturn.onchange = updateModalWhatsapp;
+    updateModalWhatsapp();
     $('#copyLink').onclick = async () => {
       try { await navigator.clipboard.writeText(carLink(car)); $('#copyLink').textContent = t('copied'); setTimeout(() => $('#copyLink').textContent = t('copy'), 1300); }
       catch(e) { alert(carLink(car)); }
@@ -565,6 +696,7 @@
   $('#carModal').onclick = e => { if (e.target.id === 'carModal') closeModal(); };
   window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   window.openCar = openCar;
+  window.sendCardWhatsapp = sendCardWhatsapp;
 
   $('#year').textContent = new Date().getFullYear();
   updateStaticText(); renderFilters(); renderCars();
