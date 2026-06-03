@@ -160,6 +160,106 @@
       .card-actions { grid-template-columns: 1fr; }
       .contact-box, .modal-content { padding: 24px; }
     }
+
+
+    /* ===== Mobile & responsive fixes - Rent a Car Enzo ===== */
+    .actions { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+    .lang-btn, .menu-btn, .whatsapp-top {
+      border:1px solid rgba(255,255,255,.14); border-radius:999px;
+      background:rgba(255,255,255,.06); color:var(--text); font-weight:900;
+      min-height:42px; padding:0 14px; cursor:pointer; display:inline-flex;
+      align-items:center; justify-content:center;
+    }
+    .whatsapp-top { background:var(--green); color:#fff; border-color:transparent; }
+    .menu-btn { display:none; width:42px; padding:0; font-size:1.35rem; }
+    .navlinks { display:flex; align-items:center; gap:18px; }
+    .navlinks a { color:var(--muted); font-weight:800; font-size:.94rem; }
+    .navlinks a:hover { color:var(--orange2); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:13px 18px; border-radius:16px; font-weight:900; text-align:center; border:1px solid transparent; }
+    .btn-primary { background:linear-gradient(135deg,var(--orange),var(--orange2)); color:#160b02; }
+    .btn-ghost { background:rgba(255,255,255,.06); color:var(--text); border-color:var(--line); }
+    .lead { color:var(--muted); line-height:1.75; font-size:1.08rem; max-width:650px; }
+    h1 { font-size:clamp(2.45rem,6.6vw,5.3rem); line-height:.98; letter-spacing:-.075em; margin:18px 0; }
+    .gradient { background:linear-gradient(135deg,var(--orange),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; color:var(--orange2); font-weight:900; margin-bottom:12px; }
+    .dot { width:9px; height:9px; border-radius:50%; background:var(--orange); box-shadow:0 0 20px rgba(255,138,0,.8); }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+    .stat { background:rgba(0,0,0,.34); border:1px solid var(--line); border-radius:18px; padding:14px; }
+    .stat b { display:block; color:var(--orange2); font-size:1.35rem; }
+    .stat span { color:var(--muted); font-size:.82rem; font-weight:800; }
+    .contact-card { display:grid; gap:12px; }
+    .contact-row { padding:14px 16px; border:1px solid var(--line); border-radius:16px; background:rgba(0,0,0,.22); color:var(--muted); }
+    .contact-row strong { color:var(--text); }
+    .foot { display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; color:var(--muted); }
+
+    /* Fix modal class mismatch */
+    .modal > .modal-content { width:min(980px,100%); max-height:92vh; overflow:auto; position:relative; background:#151515; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:0; }
+    .modal-info { padding:34px; }
+    .modal-info h2 { font-size:clamp(1.75rem,3vw,2.6rem); margin:12px 0; }
+    .modal-desc { color:var(--muted); line-height:1.75; margin:18px 0; }
+    .modal-specs { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 26px; }
+    .modal-specs div { background:rgba(255,255,255,.07); border:1px solid var(--line); color:var(--muted); border-radius:999px; padding:8px 10px; font-size:.8rem; font-weight:800; }
+
+    @media (max-width: 920px) {
+      .container { width:min(100% - 28px, 1180px); }
+      .nav { height:70px; }
+      .logo { width:50px; height:50px; border-radius:15px; }
+      .brand { min-width:0; gap:10px; }
+      .brand span { font-size:1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:42vw; }
+      .navlinks { position:fixed; top:78px; left:14px; right:14px; display:none; flex-direction:column; align-items:stretch; gap:6px; padding:14px; border-radius:22px; background:rgba(15,15,16,.98); border:1px solid rgba(255,138,0,.24); box-shadow:0 22px 60px rgba(0,0,0,.5); }
+      .navlinks.open { display:flex; }
+      .navlinks a { padding:13px 14px; border-radius:14px; background:rgba(255,255,255,.04); }
+      .menu-btn { display:inline-flex; }
+      .hero { padding:112px 0 46px; }
+      .hero-grid, .contact-box, .modal-grid { grid-template-columns:1fr; gap:24px; }
+      .hero-card img, .modal-img { min-height:0; height:300px; }
+      .feature-grid, .steps, .cars-grid { grid-template-columns:repeat(2,1fr); }
+      .section-head { display:block; margin-bottom:22px; }
+      .section-head p { margin-top:12px; }
+      section { padding:54px 0; }
+    }
+
+    @media (max-width: 620px) {
+      body { background:radial-gradient(circle at 10% 0%, rgba(255,138,0,.24), transparent 30%), linear-gradient(180deg,#080808 0%,#121212 55%,#0b0b0c 100%); }
+      .container { width:calc(100% - 24px); }
+      .topbar { background:rgba(8,8,9,.94); }
+      .nav { height:66px; gap:8px; }
+      .logo { width:44px; height:44px; border-radius:13px; }
+      .brand span { max-width:44vw; font-size:.94rem; }
+      .whatsapp-top { display:none; }
+      .lang-btn, .menu-btn { min-height:38px; width:38px; padding:0; }
+      .hero { padding-top:96px; padding-bottom:36px; }
+      h1 { font-size:clamp(2.15rem,11vw,3.4rem); letter-spacing:-.065em; }
+      h2 { font-size:clamp(1.75rem,8vw,2.45rem); letter-spacing:-.05em; }
+      .lead { font-size:.98rem; }
+      .hero-buttons { display:grid; grid-template-columns:1fr; gap:10px; }
+      .hero-card { border-radius:24px; padding:10px; }
+      .hero-card::before { left:20px; top:20px; font-size:.72rem; }
+      .hero-card img { height:245px; border-radius:20px; }
+      .stats, .feature-grid, .steps, .cars-grid { grid-template-columns:1fr; }
+      .feature { min-height:auto; padding:22px; }
+      .filters { overflow-x:auto; flex-wrap:nowrap; padding-bottom:8px; -webkit-overflow-scrolling:touch; }
+      .filter { white-space:nowrap; flex:0 0 auto; }
+      .car-card img { height:210px; }
+      .car-title-row { flex-direction:column; gap:6px; }
+      .card-actions { grid-template-columns:1fr; }
+      .contact-box { padding:22px; border-radius:22px; }
+      .modal { padding:10px; align-items:start; overflow:auto; }
+      .modal > .modal-content { max-height:none; margin:8px 0; border-radius:22px; }
+      .modal-img { height:235px; border-radius:22px 22px 0 0; }
+      .modal-info { padding:22px; }
+      .modal-actions { grid-template-columns:1fr; }
+      .close { right:12px; top:12px; width:38px; height:38px; }
+      .foot { display:grid; gap:8px; text-align:center; justify-content:center; }
+    }
+
+    @media (max-width: 380px) {
+      .brand span { max-width:38vw; font-size:.88rem; }
+      .container { width:calc(100% - 18px); }
+      .hero-card img, .modal-img { height:215px; }
+      .feature, .car-body, .step { padding:18px; }
+    }
+
 </style>
 </head>
 <body>
